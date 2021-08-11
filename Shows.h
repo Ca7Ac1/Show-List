@@ -43,6 +43,8 @@ class ShowList
     bool descendingPrimary;
     bool descendingSecondary;
 
+    int showMatch(const std::string &, const std::string &) const;
+
 public:
     ShowList(const std::string &);
 
