@@ -102,8 +102,8 @@ int main()
                 while (true)
                 {
                     clear();
-                    std::cout << header() << "\n";
-                    std::cout << "\n2. Watch episode\n2. Update score\n3. Update number of watched episodes\n4. Update the total number of episodes\n5. Exit\n";
+                    std::cout << header() << "\n" << (std::string) show << "\n";
+                    std::cout << "\n1. Watch episode\n2. Update score\n3. Update number of watched episodes\n4. Update the total number of episodes\n5. Exit\n";
                     std::cin >> updateStatus;
 
                     if (updateStatus == 5)
