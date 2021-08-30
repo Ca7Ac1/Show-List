@@ -13,9 +13,9 @@ int main()
     std::string password;
 
     std::cout << "---------------------Welcome to your show list---------------------";
-    std::cout << "\nPlease enter your username: ";
+    std::cout << "\nPlease enter your username (or create a new username): ";
     std::cin >> username;
-    std::cout << "Please enter your password: ";
+    std::cout << "Please enter your password (or create a new password): ";
     std::cin >> password;
 
     while (!authenticate(username, password))
@@ -32,6 +32,7 @@ int main()
     while (!finished)
     {
         clear();
+
         try
         {
             int response;
@@ -74,6 +75,13 @@ int main()
             {
                 std::string name;
                 bool cancel;
+
+                if (!showList.hasShow())
+                {
+                    std::cout << "Your list is currently empty. Try adding some shows! ";
+                    std::cin.ignore();
+                    break;
+                }
 
                 std::cout << "Please enter the name of the show: ";
                 std::cin >> name;
@@ -143,7 +151,12 @@ int main()
 
                 std::cout << "Enter the name: ";
                 std::cin.ignore();
-                std::getline(std::cin, name);
+
+                while (trim(name) == "")
+                {
+                    std::getline(std::cin, name);
+                }
+
                 std::cout << "\nEnter your score (0 - 10): ";
                 std::cin >> score;
                 std::cout << "\nEnter the number of episodes you have watched: ";

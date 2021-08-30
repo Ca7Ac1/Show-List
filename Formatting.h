@@ -15,6 +15,9 @@ extern const int kRightEpisodePad;
 std::string pad(int, int, int);
 std::string pad(std::string, int, int);
 std::string header();
+std::string ltrim(const std::string &s);
+std::string rtrim(const std::string &s);
+std::string trim(const std::string &s);
 void clear();
 
 #endif

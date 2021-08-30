@@ -51,6 +51,7 @@ public:
     void addShow(const std::string &, int, int, int);
     Show &getShow(const std::string &);
     std::string findShow(const std::string &) const;
+    bool hasShow() const;
     void sort(int, int, bool, bool);
     void sort();
     operator std::string() const;

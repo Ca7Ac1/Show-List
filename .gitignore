@@ -32,5 +32,8 @@
 *.out
 *.app
 
+# Authentication
+*.txt
+
 # Vscode files
 *.json

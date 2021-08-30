@@ -21,14 +21,17 @@ bool cmprName(const Show &a, const Show &b)
 {
     return a.getName() < b.getName();
 }
+
 bool cmprScore(const Show &a, const Show &b)
 {
     return a.getScore() < b.getScore();
 }
+
 bool cmprWatched(const Show &a, const Show &b)
 {
     return a.getWatched() < b.getWatched();
 }
+
 bool cmprUnwatched(const Show &a, const Show &b)
 {
     return (a.getTotal() - a.getWatched()) < (b.getTotal() - b.getWatched());
@@ -74,6 +77,11 @@ std::string ShowList::findShow(const std::string &name) const
     }
 
     return show;
+}
+
+bool ShowList::hasShow() const
+{
+    return shows.size() > 0;
 }
 
 int ShowList::showMatch(const std::string &input, const std::string &actual) const
