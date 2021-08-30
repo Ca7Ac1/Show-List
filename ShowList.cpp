@@ -5,7 +5,8 @@
 #include <algorithm>
 #include <vector>
 
-const int kAddDistance = 1;
+const int kAppendDistance = 0;
+const int kInsertDistance = 1;
 const int kDeleteDistance = 15;
 const int kReplaceDistance = 12;
 
@@ -94,21 +95,17 @@ int ShowList::showMatch(const std::string &input, const std::string &actual) con
         {
             if (i == 0)
             {
-                distance[i][j] = j * kAddDistance;
+                distance[i][j] = j * kInsertDistance;
             }
             else if (j == 0)
             {
                 distance[i][j] = i * kDeleteDistance;
             }
-            else if (input[i - 1] == actual[j - 1])
-            {
-                distance[i][j] = std::min({distance[i - 1][j], distance[i][j - 1], distance[i - 1][j - 1]});
-            }
             else
             {
                 distance[i][j] = std::min({distance[i - 1][j] + kDeleteDistance,
-                                           distance[i][j - 1] + kAddDistance,
-                                           distance[i - 1][j - 1] + kReplaceDistance});
+                                           distance[i][j - 1] + (i == input.size() ? kAppendDistance : kInsertDistance),
+                                           distance[i - 1][j - 1] + (input[i - 1] == actual[j - 1] ? 0 : kReplaceDistance)});
             }
         }
     }
