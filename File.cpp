@@ -32,8 +32,6 @@ bool FileReader::isEnd()
     return file.eof();
 }
 
-FileWriter::FileWriter(std::string path) : FileWriter(path, false) {}
-
 FileWriter::FileWriter(std::string path, bool overwrite)
 {
     if (overwrite)

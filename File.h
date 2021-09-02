@@ -21,8 +21,8 @@ class FileWriter
     std::ofstream file;
 
 public:
-    FileWriter(std::string);
-    FileWriter(std::string, bool);
+    FileWriter(std::string, bool=false);
+    ~FileWriter();
     void writeLine(const std::string &);
 };
 

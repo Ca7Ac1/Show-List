@@ -4,29 +4,28 @@
 
 #include <string>
 
-
 bool authenticate(const std::string &username, const std::string &password)
 {
-    if (trim(username) == "" || trim(password) == "")
+    if (username.find(" ") != std::string::npos || password.find(" ") != std::string::npos || trim(username) == "" || trim(password) == "")
     {
         return false;
     }
 
-    FileReader userInfoReader = FileReader(kAuthenticationFile);
+    FileReader userInfoReader(kAuthenticationFile);
 
     while (!userInfoReader.isEnd())
     {
-        std::string readUsername = userInfoReader.readNext();
-        std::string readPassword = userInfoReader.readNext();
+        std::string readUsername = trim(userInfoReader.readNext());
+        std::string readPassword = trim(userInfoReader.readNext());
         userInfoReader.skipLine();
-        
+
         if (readUsername == username)
         {
             return password == readPassword;
         }
     }
 
-    FileWriter userInfoWriter = FileWriter(kAuthenticationFile);
+    FileWriter userInfoWriter(kAuthenticationFile);
     userInfoWriter.writeLine(username + " " + password);
 
     return true;
