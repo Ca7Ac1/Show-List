@@ -12,13 +12,13 @@ bool authenticate(const std::string &username, const std::string &password)
         return false;
     }
 
-    File userInfo = File(kAuthenticationFile);
+    FileReader userInfoReader = FileReader(kAuthenticationFile);
 
-    while (!userInfo.end())
+    while (!userInfoReader.isEnd())
     {
-        std::string readUsername = userInfo.readNext();
-        std::string readPassword = userInfo.readNext();
-        userInfo.skipLine();
+        std::string readUsername = userInfoReader.readNext();
+        std::string readPassword = userInfoReader.readNext();
+        userInfoReader.skipLine();
         
         if (readUsername == username)
         {
@@ -26,7 +26,8 @@ bool authenticate(const std::string &username, const std::string &password)
         }
     }
 
-    userInfo.writeLine(username + " " + password);
+    FileWriter userInfoWriter = FileWriter(kAuthenticationFile);
+    userInfoWriter.writeLine(username + " " + password);
 
     return true;
 }

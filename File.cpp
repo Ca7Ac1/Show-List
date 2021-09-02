@@ -3,18 +3,17 @@
 #include <string>
 #include <fstream>
 
-File::File(std::string path)
+FileReader::FileReader(std::string path)
 {
     file.open(path);
 }
 
-File::~File()
+FileReader::~FileReader()
 {
-    file << std::flush;
     file.close();
 }
 
-std::string File::readNext()
+std::string FileReader::readNext()
 {
     std::string next;
     file >> next;
@@ -22,18 +21,38 @@ std::string File::readNext()
     return next;
 }
 
-void File::skipLine()
+void FileReader::skipLine()
 {
     std::string skipped;
     std::getline(file, skipped);
 }
 
-void File::writeLine(const std::string &line)
-{
-    file << line << '\n';
-}
-
-bool File::end()
+bool FileReader::isEnd()
 {
     return file.eof();
+}
+
+FileWriter::FileWriter(std::string path) : FileWriter(path, false) {}
+
+FileWriter::FileWriter(std::string path, bool overwrite)
+{
+    if (overwrite)
+    {
+        file.open(path, std::ofstream::trunc);
+    }
+    else
+    {
+        file.open(path, std::ofstream::app);
+    }
+}
+
+FileWriter::~FileWriter()
+{
+    file << std::flush;
+    file.close();
+}
+
+void FileWriter::writeLine(const std::string &line)
+{
+    file << line << '\n';
 }
