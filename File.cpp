@@ -32,3 +32,8 @@ void File::writeLine(const std::string &line)
 {
     file << line << '\n';
 }
+
+bool File::end()
+{
+    return file.eof();
+}

@@ -14,6 +14,7 @@ public:
     std::string readNext();
     void skipLine();
     void writeLine(const std::string &);
+    bool end();
 };
 
 #endif

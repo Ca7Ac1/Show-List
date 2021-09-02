@@ -3,6 +3,8 @@
 
 #include <string>
 
+const std::string kAuthenticationFile = "UserInfo.txt";
+
 const int kLeftShowPad = 7;
 const int kRightShowPad = 57;
 

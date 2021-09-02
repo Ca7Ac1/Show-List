@@ -3,6 +3,8 @@
 
 #include <string>
 
+extern const std::string kAuthenticationFile;
+
 extern const int kLeftShowPad;
 extern const int kRightShowPad;
 
