@@ -1,5 +1,6 @@
 #include "Shows.h"
 #include "Formatting.h"
+#include "File.h"
 
 #include <string>
 #include <algorithm>
@@ -12,7 +13,6 @@ const int kReplaceDistance = 12;
 
 const std::map<int, std::pair<std::string, bool (*)(const Show &, const Show &)>> kSortValues =
     {
-        // Name 2. Score 3. Episodes watched 4. Episodes left 5. None
         {1, {"Name", cmprName}},
         {2, {"Score", cmprScore}},
         {3, {"Episodes watched", cmprWatched}},
@@ -40,6 +40,33 @@ bool cmprUnwatched(const Show &a, const Show &b)
 
 ShowList::ShowList(const std::string &username) : sortPrimary{-1}, sortSecondary{-1}, descendingPrimary{true}, descendingSecondary{true}
 {
+    this->username = username;
+    FileReader userShowReader("./UserShows/" + username + "_Shows.txt");
+
+    while (!userShowReader.isEnd())
+    {
+
+        std::string name = userShowReader.readLine();
+        int score = std::stoi(userShowReader.readNext());
+        int watched = std::stoi(userShowReader.readNext());
+        int total = std::stoi(userShowReader.readNext());
+
+        addShow(name, score, watched, total);
+        userShowReader.skipLine();
+    }
+}
+
+ShowList::~ShowList()
+{
+    FileWriter userShowWriter("UserShows/" + username + "_Shows.txt", true);
+
+    for (Show show : shows)
+    {
+        userShowWriter.writeLine(show.getName());
+        userShowWriter.writeLine(std::to_string(show.getScore()) + " " +
+                                 std::to_string(show.getWatched()) + " " +
+                                 std::to_string(show.getTotal()));
+    }
 }
 
 void ShowList::addShow(const std::string &name, int score, int watched, int total)

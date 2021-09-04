@@ -14,7 +14,6 @@ class Show
 
 public:
     Show(std::string, int, int, int);
-    //~Show();
 
     std::string getName() const;
     int getScore() const;
@@ -37,7 +36,10 @@ bool cmprUnwatched(const Show &, const Show &);
 
 class ShowList
 {
+    std::string username;
+
     std::vector<Show> shows;
+
     int sortPrimary;
     int sortSecondary;
     bool descendingPrimary;
@@ -47,6 +49,7 @@ class ShowList
 
 public:
     ShowList(const std::string &);
+    ~ShowList();
 
     void addShow(const std::string &, int, int, int);
     Show &getShow(const std::string &);

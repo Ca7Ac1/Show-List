@@ -1,11 +1,12 @@
 #include "File.h"
+#include "Formatting.h"
 
 #include <string>
 #include <fstream>
 
-FileReader::FileReader(std::string path)
+FileReader::FileReader(const std::string &path)
 {
-    file.open(path);
+    file = std::ifstream(path);
 }
 
 FileReader::~FileReader()
@@ -18,29 +19,37 @@ std::string FileReader::readNext()
     std::string next;
     file >> next;
 
-    return next;
+    return trim(next);
+}
+
+std::string FileReader::readLine()
+{
+    std::string next;
+    std::getline(file, next);
+
+    return trim(next);
 }
 
 void FileReader::skipLine()
 {
-    std::string skipped;
-    std::getline(file, skipped);
+    readLine();
 }
 
 bool FileReader::isEnd()
 {
-    return file.eof();
+    file.peek();
+    return file.eof() || !file.good();
 }
 
-FileWriter::FileWriter(std::string path, bool overwrite)
+FileWriter::FileWriter(const std::string &path, bool overwrite)
 {
     if (overwrite)
     {
-        file.open(path, std::ofstream::trunc);
+        file = std::ofstream(path, std::ofstream::trunc);
     }
     else
     {
-        file.open(path, std::ofstream::app);
+        file = std::ofstream(path, std::ofstream::app);
     }
 }
 
