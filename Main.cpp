@@ -108,13 +108,11 @@ int main()
 
                     if (updateStatus == 5)
                     {
-                        showList.sort();
                         break;
                     }
 
                     if (updateStatus != 1 && updateStatus != 2 && updateStatus != 3 && updateStatus != 4)
                     {
-                        showList.sort();
                         throw std::exception();
                     }
 
@@ -140,11 +138,8 @@ int main()
                     {
                         show.updateTotal(newVal);
                     }
-
-                    showList.sort();
                 }
-
-                showList.sort();
+                
                 break;
             }
             case 4:
