@@ -140,6 +140,7 @@ int main()
                     }
                 }
 
+                showList.sort();
                 break;
             }
             case 4:
