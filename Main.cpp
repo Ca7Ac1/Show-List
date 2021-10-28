@@ -108,6 +108,7 @@ int main()
 
                     if (updateStatus == 5)
                     {
+                        showList.sort();
                         break;
                     }
 
